@@ -37,6 +37,9 @@ def switch_case(c):
         cursor.execute("SHOW TABLES")
         for t in cursor:
             print(t)
+    elif c==5:
+        #It's show the list of tables
+        cursor.execute("desc ORDERLIST")
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
