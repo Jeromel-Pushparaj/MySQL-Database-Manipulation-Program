@@ -22,31 +22,35 @@ def switch_case(c):
             print(x)
     elif c==2:
         #Executing the CREATE DATABASE mysql query to create a database
-        cursor.execute("CREATE DATABASE jpt")
+        dbname = str(input("enter the dbname: "))
+        cursor.execute("CREATE DATABASE "+ dbname)
     elif c==3:
+        #Executing the CREATE DATABASE mysql query to create a database
+        udbname = str(input("enter the dbname You want use: "))
+        cursor.execute("USE "+ udbname)
+    elif c==4:
         #Storing the Mysql query in the orderlist
-        orderlist = """CREATE TABLE ORDERLIST ( 
+        table_name = str(input("enter the table name: "))
+        orderlist = "CREATE TABLE" + table_name + """( 
                    NAME  VARCHAR(20) NOT NULL,  
                    SIZES INT NOT NULL,
                    PAYMENT VARCHAR(5)
                    )"""
         #Executing the above query
         cursor.execute(orderlist)
-    elif c==4:
+    elif c==5:
         #It's show the list of tables
         cursor.execute("SHOW TABLES")
         for t in cursor:
             print(t)
-    elif c==5:
+    elif c==6:
         #It's show the list of tables
         cursor.execute("desc ORDERLIST")
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
-print("1.Show Database\n2.Create Database with Name jpt\n3.Create Table with Name Orderlist\n4.Show Lists of Tables")       
+print("1.Show Database\n2.Create Database\n3.to choose a database\n4.Create Table\n4.Show Lists of Tables")       
 
 while (1):
     c = int(input("Enter the option: "))
     switch_case(c)
-
-
