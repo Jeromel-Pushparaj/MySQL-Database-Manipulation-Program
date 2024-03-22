@@ -5,12 +5,11 @@ print("(Note: This program will run continuously, offering options from 1 to 4, 
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = ""
+    password = "root"
     # database = "database_name"
 )
 print(mydb,"\nDB Connection successfull....")
 
-    
 
 def switch_case(c):
     #creating a instance of cursor
@@ -30,13 +29,14 @@ def switch_case(c):
         cursor.execute("USE "+ udbname)
     elif c==4:
         #Storing the Mysql query in the orderlist
+
         table_name = str(input("enter the table name: "))
-        n_c = int(input("enter how many coulumn you need: "))
-        for i in range(1,n_c):
-            name_c = str(input("enter the column"+i+"name: "))
-            d_type = str(input("enter the datatype of the coloun: "))
+        # n_c = int(input("enter how many coulumn you need: "))
+        # for i in range(1,n_c):
+        #     name_c = str(input("enter the column"+i+"name: "))
+        #     d_type = str(input("enter the datatype of the coloun: "))
             
-        orderlist = "CREATE TABLE" + table_name + """( 
+        orderlist = "CREATE TABLE " + table_name + """( 
                    NAME  VARCHAR(20) NOT NULL,  
                    SIZES INT NOT NULL,
                    PAYMENT VARCHAR(5)
@@ -50,11 +50,14 @@ def switch_case(c):
             print(t)
     elif c==6:
         #It's show the list of tables
-        cursor.execute("desc ORDERLIST")
+        table_name = str(input("enter the table name, you want desc: "))
+        cursor.execute("desc " + table_name + ";")
+        for t in cursor:
+            print(t)
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
-print("1.Show Database\n2.Create Database\n3.to choose a database\n4.Create Table\n4.Show Lists of Tables")       
+print("1.Show Database\n2.Create Database\n3.to choose a database\n4.Create Table\n5.Show Lists of Tables\n6.desc the table")       
 
 while (1):
     c = int(input("Enter the option: "))
