@@ -4,9 +4,9 @@ print("(Note: This program will run continuously, offering options from 1 to 4, 
 #connection is establish hear
 mydb = mysql.connector.connect(
     host = "localhost",
-    user = "Your_username",
-    password = "Your_Password",
-    database = "database_name"
+    user = "root",
+    password = ""
+    # database = "database_name"
 )
 print(mydb,"\nDB Connection successfull....")
 
@@ -31,6 +31,11 @@ def switch_case(c):
     elif c==4:
         #Storing the Mysql query in the orderlist
         table_name = str(input("enter the table name: "))
+        n_c = int(input("enter how many coulumn you need: "))
+        for i in range(1,n_c):
+            name_c = str(input("enter the column"+i+"name: "))
+            d_type = str(input("enter the datatype of the coloun: "))
+            
         orderlist = "CREATE TABLE" + table_name + """( 
                    NAME  VARCHAR(20) NOT NULL,  
                    SIZES INT NOT NULL,
