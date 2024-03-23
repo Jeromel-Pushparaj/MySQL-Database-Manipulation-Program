@@ -69,6 +69,13 @@ def switch_case(c):
         result = cursor.fetchall()
         for row in result:
             print(row)
+    elif c == 8:
+        column_name = {}
+        table_name = str(input("Enter the table name you want to insert: "))
+        c_n = str(input("Enter the columns name : "))
+        value = str(input("Enter the value of the column you enter: "))
+        column_name[c_n]=value
+        numberOfColumn = cursor.execute("SELECT count(*) as No_of_Column FROM information_schema.columns WHERE table_name = '" + table_name +"';")
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
