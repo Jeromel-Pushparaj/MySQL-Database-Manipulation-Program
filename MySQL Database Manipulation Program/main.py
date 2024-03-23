@@ -31,18 +31,27 @@ def switch_case(c):
         #Storing the Mysql query in the orderlist
 
         table_name = str(input("enter the table name: "))
-        # n_c = int(input("enter how many coulumn you need: "))
-        # for i in range(1,n_c):
-        #     name_c = str(input("enter the column"+i+"name: "))
-        #     d_type = str(input("enter the datatype of the coloun: "))
-            
-        orderlist = "CREATE TABLE " + table_name + """( 
-                   NAME  VARCHAR(20) NOT NULL,  
-                   SIZES INT NOT NULL,
-                   PAYMENT VARCHAR(5)
-                   )"""
+        no_c = int(input("enter how many columns you need: "))
+
+        columns = []  # Initialize an empty list outside the loop to hold column definitions
+
+        for i in range(no_c):
+            name_c = str(input("enter the column name: "))
+            d_type = str(input("enter the datatype of the column: "))
+            columns.append(name_c + " " + d_type)  # Append each column definition to the list
+         
+        """
+        Now, to create the table content, you should join the columns into a single string
+
+        Explaination for the .join() inbuit fuciton
+        ", ".join(columns): This part is where the magic happens. ", ".join(columns) joins all the elements of the columns list into a single string, separated by ", ".
+        For example, if columns is ['id INT', 'name VARCHAR(50)', 'age INT'], then ", ".join(columns) will result in 'id INT, name VARCHAR(50), age INT'.
+        """
+
+        table_content = "CREATE TABLE " + table_name + "(" + ", ".join(columns) + ")"
+        print(table_content)
         #Executing the above query
-        cursor.execute(orderlist)
+        cursor.execute(table_content)
     elif c==5:
         #It's show the list of tables
         cursor.execute("SHOW TABLES")
@@ -54,10 +63,16 @@ def switch_case(c):
         cursor.execute("desc " + table_name + ";")
         for t in cursor:
             print(t)
+    elif c == 7:
+        table_name = str(input("Enter the table_name you want select: "))
+        cursor.execute("select * from "+table_name)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
-print("1.Show Database\n2.Create Database\n3.to choose a database\n4.Create Table\n5.Show Lists of Tables\n6.desc the table")       
+print("1.Show Database\n2.Create Database\n3.to choose a database\n4.Create Table\n5.Show Lists of Tables\n6.desc the table\n7.select the table")       
 
 while (1):
     c = int(input("Enter the option: "))
