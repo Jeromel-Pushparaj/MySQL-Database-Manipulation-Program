@@ -10,6 +10,21 @@ mydb = mysql.connector.connect(
 )
 print(mydb,"\nDB Connection successfull....")
 
+def insert_data(connection, name, age, email):
+    try:
+        cursor = connection.cursor()
+        # MySQL query to insert data into the table
+        sql_query = "INSERT INTO users (name, age, email) VALUES (%s, %s, %s)"
+        # Values to be inserted
+        data = (name, age, email)
+        # Executing the query
+        cursor.execute(sql_query, data)
+        # Committing the changes to the database
+        connection.commit()
+        print("Data inserted successfully!")
+    except mysql.connector.Error as error:
+        print("Failed to insert data into MySQL table:", error)
+
 
 def switch_case(c):
     #creating a instance of cursor
@@ -74,8 +89,6 @@ def switch_case(c):
         table_name = str(input("Enter the table name you want to insert: "))
         c_n = str(input("Enter the columns name : "))
         value = str(input("Enter the value of the column you enter: "))
-        column_name[c_n]=value
-        numberOfColumn = cursor.execute("SELECT count(*) as No_of_Column FROM information_schema.columns WHERE table_name = '" + table_name +"';")
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
