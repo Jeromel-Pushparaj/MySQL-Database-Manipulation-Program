@@ -5,8 +5,8 @@ print("(Note: This program will run continuously, offering options from 1 to 4, 
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "root"
-    # database = "database_name"
+    password = "root",
+    auth_plugin='mysql_native_password'
 )
 print(mydb,"\nDB Connection successfull....")
 
@@ -84,11 +84,12 @@ def switch_case(c):
         result = cursor.fetchall()
         for row in result:
             print(row)
-    elif c == 8:
-        column_name = {}
-        table_name = str(input("Enter the table name you want to insert: "))
-        c_n = str(input("Enter the columns name : "))
-        value = str(input("Enter the value of the column you enter: "))
+        # elif c == 8:
+    #     column_name = {}
+    #     table_name = str(input("Enter the table name you want to insert: "))
+    #     c_n = str(input("Enter the columns name : "))
+    #     value = str(input("Enter the value of the column you enter: "))
+
     else:
         exit(1)
 print("\nStart the actions By choosing below option: ")      
